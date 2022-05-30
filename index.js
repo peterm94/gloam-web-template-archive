@@ -8,4 +8,6 @@ let e = game.add_entity();
 
 console.log(e);
 
-game.add_component_web(e, (1, 2));
+game.add_component_web(e, {"how": "idk"});
+game.add_component_web(e, 4);
+
