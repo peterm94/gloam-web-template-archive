@@ -1,12 +1,15 @@
-import * as gloam from "../../gloam-engine/pkg";
+import * as gloam from "gloam-engine";
 
-class B implements gloam.Script {
+class WebScript implements gloam.Script {
     update(): void
     {
-        console.log("this is all plugged together.")
+        console.log("this was created in typscript.")
     }
 }
+// let renderer = new gloam.AsciiRenderer();
 
-const b = new B();
-
-gloam.run_update(b);
+let game = new gloam.Game();
+let renderer = game.create_renderer();
+let actual_renderer = game.get_node(renderer);
+game.add_web_script(new WebScript());
+game.run_all_scripts();
