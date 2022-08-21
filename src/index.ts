@@ -1,4 +1,49 @@
-import {Game, GameObjectShim, JsGameObject} from "gloam-engine";
+import {Gloam, JsGameObject} from "gloam-engine";
+import earthSpr from "./Art/red.png";
+
+class Apple implements JsGameObject
+{
+    pos_x = 0;
+    pos_y = 0;
+
+    init(): void
+    {
+        console.log("appl init")
+        console.log(earthSpr);
+        // const aa = btoa(earthSpr);
+        // console.log(aa);
+        // Gloam.load_texture(aa);
+    }
+
+    update(delta: number): void
+    {
+        console.log("update apple", delta);
+        let meee;
+        Gloam.with_object(2, (other) => {
+            Gloam.with_object(2, (other) => {
+                console.log("This is illegal... or not?");
+            })
+        });
+
+        console.log(meee);
+
+        Gloam.with_objects([1], (a) => {
+            console.log("test")
+            console.log(a);
+        });
+
+        Gloam.with_type("Snake", (other: Snake) => {
+            console.log("SNAME: ", other.apple)
+        });
+    }
+
+    public move()
+    {
+        // TODO rand
+        this.pos_x = 12;
+        this.pos_y = 12;
+    }
+}
 
 class Snake implements JsGameObject
 {
@@ -7,12 +52,14 @@ class Snake implements JsGameObject
     y_dir = 0;
     apple: Apple
 
-    init(ga: GameObjectShim) {
+    init(): void
+    {
+        console.log("Init has been called.");
         this.apple = new Apple();
-        ga.add_game_object(this.apple);
+        Gloam.add_object(this.apple);
     }
 
-    update(ga: GameObjectShim)
+    update(delta: number): void
     {
         console.log(this.segments);
         // move the head
@@ -20,32 +67,18 @@ class Snake implements JsGameObject
         this.segments.unshift([head[0] + this.x_dir, head[1] + this.y_dir]);
 
         // if collecting an apple, don't do this.
-        if (head[0] == this.apple.pos_x && head[1] == this.apple.pos_y) {
+        if (head[0] == this.apple.pos_x && head[1] == this.apple.pos_y)
+        {
             this.apple.move();
-        } else {
+        } else
+        {
             this.segments.pop();
         }
     }
 }
 
-class Apple implements JsGameObject
-{
-    pos_x = 0;
-    pos_y = 0;
+Gloam.add_object(new Snake());
+// Gloam.start();
 
-    update(ga: GameObjectShim)
-    {
-
-    }
-
-    public move() {
-        // TODO rand
-        this.pos_x = 12;
-        this.pos_y = 12;
-    }
-}
-
-
-let game = new Game();
-game.add_game_object(new Snake());
-game.update();
+Gloam.update_once(10);
+Gloam.update_once(10);

@@ -18,6 +18,14 @@ module.exports = {
                 use: 'ts-loader',
                 exclude: /node_modules/,
             },
+            // {
+            //     test: /\.png?$/,
+            //     use: 'raw-loader'
+            // }
+            {
+                test: /\.(png|jpg|jpeg|gif)$/i,
+                type: "asset/resource"
+            }
         ],
     },
     resolve: {
