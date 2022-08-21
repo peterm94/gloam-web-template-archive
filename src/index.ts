@@ -1,5 +1,5 @@
 import {Gloam, JsGameObject} from "gloam-engine";
-import earthSpr from "./Art/red.png";
+import red from "./Art/red.png";
 
 class Apple implements JsGameObject
 {
@@ -9,10 +9,10 @@ class Apple implements JsGameObject
     init(): void
     {
         console.log("appl init")
-        console.log(earthSpr);
+        console.log(red);
         // const aa = btoa(earthSpr);
         // console.log(aa);
-        // Gloam.load_texture(aa);
+        Gloam.load_texture(red);
     }
 
     update(delta: number): void
