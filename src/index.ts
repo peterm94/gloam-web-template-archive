@@ -1,6 +1,8 @@
-import {Gloam, JsGameObject} from "gloam-engine";
+import {Gloam, JsGameObject, hello} from "gloam-engine";
 import red from "./Art/red.png";
 
+hello();
+ 
 class Apple implements JsGameObject
 {
     pos_x = 0;
@@ -8,11 +10,7 @@ class Apple implements JsGameObject
 
     init(): void
     {
-        console.log("appl init")
-        console.log(red);
-        // const aa = btoa(earthSpr);
-        // console.log(aa);
-        Gloam.load_texture(red);
+        console.log("appl init");
     }
 
     update(delta: number): void
@@ -55,6 +53,7 @@ class Snake implements JsGameObject
     init(): void
     {
         console.log("Init has been called.");
+        Gloam.load_texture(red);
         this.apple = new Apple();
         Gloam.add_object(this.apple);
     }
@@ -74,11 +73,19 @@ class Snake implements JsGameObject
         {
             this.segments.pop();
         }
+
+        for (let segment of this.segments)
+        {
+            console.log("Draw", segment)
+            Gloam.draw(0, segment[0] * 32, segment[1] * 32);
+        }
     }
 }
 
 Gloam.add_object(new Snake());
 // Gloam.start();
 
+Gloam.update_once(10);
+Gloam.update_once(10);
 Gloam.update_once(10);
 Gloam.update_once(10);
