@@ -9,9 +9,6 @@
   },
   "author": "Peter Mandile <peterm1994@hotmail.com>",
   "license": "(MIT OR Apache-2.0)",
-  "dependencies": {
-    "gloam-engine": "0.0.1"
-  },
   "devDependencies": {
     "copy-webpack-plugin": "^11.0.0",
     "ts-loader": "^9.3.0",
